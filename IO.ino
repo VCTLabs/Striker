@@ -10,7 +10,7 @@ void io_init(void)
 {
   
 #ifdef USE_I2C
-  as3935_addr = EAR1_AS3935_ADDR;
+  as3935_addr = EAR2_AS3935_ADDR;
 #endif
 
 #ifdef USE_SPI

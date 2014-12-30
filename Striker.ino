@@ -106,8 +106,8 @@
 
 /* Pins used for I2C */
 #ifdef USE_I2C
-#define SDA_PIN A4
-#define SCL_PIN A5
+#define SDA_PIN 20
+#define SCL_PIN 21
 #endif
 
 /* Pins for SPI */
@@ -122,7 +122,7 @@
 /* Pins used for other features */
 #define STRIKE_PIN  4    /* Pin used for strike generator */
 #define ALARM_PIN   5    /* Pin used for an audio alarm */
-#define LED_PIN     6    /* Pin used for an LED alarm */
+#define LED_PIN     13    /* Pin used for an LED alarm */
 #define SILENCE_PIN 7    /* Pin used for an alarm silence alarm */
 
 /* Delay needed from INT to reading ISR */

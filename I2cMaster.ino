@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
  #ifdef USE_I2C
-#include <I2cMaster.h>
+#include "I2cMaster.h"
 //==============================================================================
 // WARNING don't change SoftI2cMaster unless you verify the change with a scope
 //------------------------------------------------------------------------------
