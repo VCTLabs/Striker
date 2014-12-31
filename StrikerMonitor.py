@@ -1,6 +1,6 @@
-#!/usr/bin/python 
+#!/usr/bin/python
 #-------------------------------------------------------------------------------
-# 
+#
 #     Striker Monitor (Linux side)
 #
 #
@@ -19,7 +19,7 @@ else:
 
 
 if (windows):
-  import msvcrt 
+  import msvcrt
 else:
   import linuxcrt
 
@@ -42,7 +42,6 @@ def main():
 #-----------------------------------------------------------------------
 class Furnace:
 
-
   #-----------------------------------------------------------------------
   # Constructor
   #-----------------------------------------------------------------------
@@ -53,24 +52,25 @@ class Furnace:
     # Extract the arguments
     parser = argparse.ArgumentParser()
     parser.add_argument('--log'   , default='striker.log')
-    parser.add_argument('--port'  , default="COM5")
+    parser.add_argument('--port'  , default="/dev/ttyACM0")
     args = parser.parse_args()
 
     # Save parameters
     self.log             = args.log.rstrip(os.sep)
     self.port            = args.port
-    
+
     self.lfn = open(self.log, "a+")
 
   # End __init__
 
 
   def logText(self, txt):
+
     self.lfn.write(txt)
     self.lfn.write("\n")
     self.lfn.flush()
     os.fsync(self.lfn)
-    print txt 
+    print txt
 
   #-----------------------------------------------------------------------
   # Loop
@@ -103,7 +103,7 @@ class Furnace:
           b = self.ser.read(1)
 
           # Ignore CR
-          if (b == '\r'): 
+          if (b == '\r'):
             continue
 
           # Break if the end of a line
@@ -113,7 +113,7 @@ class Furnace:
             now = time.time()
 
             txt = ("%.3f, %s, %s")%(now, time.asctime(), s)
-	    self.logText(txt)
+            self.logText(txt)
 
             i = 0
             s = ""
@@ -135,15 +135,15 @@ class Furnace:
         else:
           x = linuxcrt.kbhit()
 
-        if (x>0): 
+        if (x>0):
 
           zip = False
 
           # Get the next byte
           if (windows):
-            b = msvcrt.getch() 
+            b = msvcrt.getch()
           else:
-            b = linuxcrt.getch() 
+            b = linuxcrt.getch()
 
           if (windows):
             ignore = '\n'
@@ -154,7 +154,7 @@ class Furnace:
 
 
           # Ignore CR
-          if (b == ignore): 
+          if (b == ignore):
             continue
 
           # Break if the end of a line
@@ -165,13 +165,13 @@ class Furnace:
 
             # If this is a command for the Arduino
             if (len(t) > 0) and (t[0] != '!'):
-	      self.logText("Cmd: "+t)
+              self.logText("Cmd: "+t)
               self.ser.write(t+"\r\n")
 
             # If this is an event log
             elif (len(t)>0) and (t[0] == '!'):
               txt = ("%.3f, %s")%(now, t)
-	      self.logText(txt)
+              self.logText(txt)
 
             j = 0
             t = ""
@@ -185,7 +185,7 @@ class Furnace:
 
           # Endif
 
-        # If keyboard bytes  
+        # If keyboard bytes
 
         # If no activity, wait a moment
         if (zip):
@@ -199,12 +199,12 @@ class Furnace:
 
     # End loop
 
-  # End definition  
+  # End definition
 
 
   #-----------------------------------------------------------------------
   # Open the serial port
-  # This is overly complicated due to EMI bug. Should just open a 
+  # This is overly complicated due to EMI bug. Should just open a
   # specified file, not try to open from a list
   #-----------------------------------------------------------------------
   def openSerialPort(self):

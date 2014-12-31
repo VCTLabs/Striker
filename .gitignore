@@ -4,3 +4,7 @@
 # Support files
 Support
 Support/*.*
+
+# logs and compiled python, etc
+*.log
+*.pyc
