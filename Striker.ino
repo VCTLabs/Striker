@@ -90,8 +90,8 @@
 #include "as3935.h"
 
 #ifdef USE_I2C
-#include "I2C.h"
-#include "I2cMaster.h"
+  #include "I2C.h"
+  #include "I2cMaster.h"
 #endif
 
 #ifdef USE_SPI
@@ -120,10 +120,10 @@
 
 
 /* Pins used for other features */
-#define STRIKE_PIN  4    /* Pin used for strike generator */
-#define ALARM_PIN   5    /* Pin used for an audio alarm */
-#define LED_PIN     13    /* Pin used for an LED alarm */
-#define SILENCE_PIN 7    /* Pin used for an alarm silence alarm */
+#define STRIKE_PIN 4    /* Pin used for strike generator */
+#define ALARM_PIN 5     /* Pin used for an audio alarm */
+#define LED_PIN 6       /* Pin used for an LED alarm */
+#define SILENCE_PIN 7   /* Pin used for an alarm silence alarm */
 
 /* Delay needed from INT to reading ISR */
 #define ISR_DELAY (3)
@@ -196,7 +196,7 @@ void setup(void) {
   /* Set unit into operation mode ???*/
 
   /* Prime the various times */
-  now = millis();
+  unsigned long now = millis();
   calTime = now+1*SEC_TO_MS;   /* First cal to be done in one second */
   bitTime = now+10*SEC_TO_MS;  /* First BIT to be done in 10 seconds */
   
